@@ -1,10 +1,14 @@
-import util, {eat} from './util'
-import dateStr from './date'
-import {getRandom} from './b'
-import createLog, {lineLog} from './log'
-util.say();
-eat()
+// import a from './imgs/a.jpg'
+// import b from './imgs/b.jpeg'
+import './index.scss'
+console.log(666)
+// var imgA = new Image()
+// imgA.src = a
 
-const log = createLog('index.js')
-log(dateStr);
-lineLog(getRandom(), 'index.js')
+// var imgB = new Image()
+// imgB.src = b
+
+// window.onload = function () {
+//   document.documentElement.append(imgA)
+//   document.documentElement.append(imgB)
+// }
