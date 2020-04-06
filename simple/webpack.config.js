@@ -4,12 +4,12 @@ const path = require('path')
 
 module.exports = {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-source-map',
   entry: {
     main: './src/index.js'
   },
   output: {
-    filename: 'bundle.[hash:8].js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'dist')
   },
   plugins: [
@@ -49,5 +49,11 @@ module.exports = {
         use: ['url-loader']
       }
     ]
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minChunks: 1
+    }
   }
 }
