@@ -19,6 +19,9 @@ module.exports = {
     }),
     new CleanWebpackPlugin()
   ],
+  resolveLoader: {
+    modules: ['node_modules', './loader/']
+  },
   module: {
     rules: [
       {
@@ -47,6 +50,10 @@ module.exports = {
       {
         test: /\.(eot|ttf|woff|woff2|svg)$/,
         use: ['url-loader']
+      },
+      {
+        test: /\.json$/,
+        loaders: 'json-loader'
       }
     ]
   },

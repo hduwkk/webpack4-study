@@ -1,35 +1,42 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const path = require('path')
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+console.log(process.env.NODE_ENV, '???????????')
 module.exports = {
-  mode: 'development',
-  devtool: 'cheap-module-source-map',
   entry: {
     main: './src/main.js'
   },
   output: {
-    filename: '[name].[hash].js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'js/[name].[hash].js',
+    path: path.resolve(__dirname, '../dist')
   },
   plugins: [
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'assets/css/[name].css'
+    }),
     new HtmlWebpackPlugin({
       title: 'hello',
       template: path.resolve(__dirname, '../public/index.html'),
       favicon: path.resolve(__dirname, '../public/favicon.ico')
     })
   ],
+  resolve: {
+    extensions: ['.js', '.vue']
+  },
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        use: ['vue-loader']
-      },
-      {
-        test: /\.scss$/,
+        test: /\.(scss|sass)$/,
         use: [
-          'vue-style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+              reloadAll: true
+            }
+          },
           {
             loader: 'css-loader',
             options: {
@@ -43,7 +50,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === 'development',
+              reloadAll: true
+            }
+          },
           {
             loader: 'css-loader',
             options: {
@@ -54,24 +67,25 @@ module.exports = {
         ]
       },
       {
-        test: /\.(jpg|jpeg|png|gif)$/,
+        test: /\.(jpe?g|png|gif)$/,
         use: [
           {
             loader: 'url-loader',
-            options: { limit: 30000, name: '[path][name]_[hash:8].[ext]' }
+            options: {
+              limit: 10000,
+              name: 'assets/imgs/[name]_[hash:8].[ext]'
+            }
           }
         ]
       },
       {
         test: /\.(eot|ttf|woff|woff2|svg)$/,
         use: ['url-loader']
+      },
+      {
+        test: /\.vue$/,
+        use: ['vue-loader']
       }
     ]
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-      minChunks: 1
-    }
   }
 }

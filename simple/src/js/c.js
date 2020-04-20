@@ -1,6 +1,5 @@
-
-import Vue from 'vue'
-export const name = "CCC"
+// import Vue from 'vue'
+export const name = 'CCC'
 
 console.log('c.js')
-console.log(Vue)
+// console.log(Vue)

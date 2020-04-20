@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack",
-    "dev": "webpack-dev-server --config ./build/webpack.base.config.js",
+    "dev": "webpack-dev-server --config ./build/webpack.dev.config.js",
+    "build:dev": "webpack --config ./build/webpack.dev.config.js",
     "build": "node ./build/build.js",
+    "build:view": "node ./build/build.js && http-server ./dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "debug": "node --inspect-brk=5858 ./node_modules/webpack/bin/webpack",
     "debug-simple": "node --inspect-brk=5858 ./debugger.js",
@@ -36,7 +37,8 @@
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.2"
   },
   "dependencies": {
     "lodash": "^4.17.15",

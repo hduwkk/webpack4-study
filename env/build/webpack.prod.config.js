@@ -32,7 +32,7 @@ module.exports = {
       {
         test: /\.(scss|sass)$/,
         use: [
-          'vue-style-loader',
+          // 'vue-style-loader',
         {
           loader:  MiniCssExtractPlugin.loader,
           options: {
@@ -52,7 +52,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
+          // 'vue-style-loader',
+          {
+            loader:  MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: './'
+            }
+          },
           {
             loader: 'css-loader',
             options: {
